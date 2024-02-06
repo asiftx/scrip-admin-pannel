@@ -214,7 +214,7 @@ const UserList = () => {
 
   return (
     <div className="admin-products-main-container">
-      {/* <Loader loading={isloading} /> */}
+     <Loader loading={isloading} /> 
       <Breadcrumb separator=">" className="bread-crumb">
         <div className="configure-server-home-icon">
           <img src={homeIcon} alt="home-icon" />
