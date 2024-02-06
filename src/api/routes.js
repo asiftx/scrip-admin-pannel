@@ -1,5 +1,5 @@
 // export const BASE_URL = "https://pix2igp54z.ap-northeast-1.awsapprunner.com/";
-export const BASE_URL = "https://xdkgzpzsen.eu-west-2.awsapprunner.com/api/v1/";
+export const BASE_URL = "https://xdkgzpzsen.eu-west-2.awsapprunner.com/";
 // export const BASE_URL = "http://localhost:4500/";
 
 export default {

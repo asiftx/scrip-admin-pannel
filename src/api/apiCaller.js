@@ -4,7 +4,7 @@ import { DeviceUUID } from "device-uuid";
 import { accessToken } from "../redux/userDataSlice";
 
 // export const BASE_URL = "https://pix2igp54z.ap-northeast-1.awsapprunner.com/";
-export const BASE_URL = "https://xdkgzpzsen.eu-west-2.awsapprunner.com/api/v1/";
+export const BASE_URL = "https://xdkgzpzsen.eu-west-2.awsapprunner.com/";
 export const Method = {
   GET: "GET",
   POST: "POST",
