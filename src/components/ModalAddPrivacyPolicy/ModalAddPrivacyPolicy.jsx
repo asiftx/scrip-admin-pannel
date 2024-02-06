@@ -7,7 +7,6 @@ import { Editor } from "@tinymce/tinymce-react";
 import { callApi } from "../../api/apiCaller";
 import routes from "../../api/routes";
 import { upload } from "../../helper/helper";
-
 const ModalAddPrivacyPolicy = ({
   setShowModal,
   showModal,
@@ -88,7 +87,7 @@ const ModalAddPrivacyPolicy = ({
         <div>
           <h3>Content</h3>
           <Editor
-            apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
+            apiKey="tocrv6fmbel9jpk13dwdcbv935blvf6k8w5ikx14g1f3u46m"
             onInit={(evt, editor) => {
               editorRef.current = editor;
             }}
