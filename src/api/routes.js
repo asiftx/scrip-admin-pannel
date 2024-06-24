@@ -1,22 +1,22 @@
 // export const BASE_URL = "https://pix2igp54z.ap-northeast-1.awsapprunner.com/";
-export const BASE_URL = "https://xdkgzpzsen.eu-west-2.awsapprunner.com/";
-// export const BASE_URL = "http://localhost:4500/";
+// export const BASE_URL = "https://xdkgzpzsen.eu-west-2.awsapprunner.com/";
+export const BASE_URL = "http://localhost:4500/";
 
 export default {
   // -----AUTH------//
   getAllUser: BASE_URL + "user",
   signUp: BASE_URL + "user/signup",
-  signIn: BASE_URL + "user/adminLogin",
+  signIn: BASE_URL + "user/testLogin",
   blockUser: BASE_URL + "user/updateProfile",
   approveCourse: BASE_URL + "updateCourse",
   deleteUser: BASE_URL + "user",
-  getCommunities: BASE_URL + "community",
-  getCourses: BASE_URL + "course",
+  getSubscribers: BASE_URL + "api/v1/subscribers",
+  getUserMessage: BASE_URL + "api/v1/getInTouch",
   updateCourse: BASE_URL + "updateCourse",
-  updateCourse: BASE_URL + "updateCourse",
+  updateUser: BASE_URL + "user",
   updateFAQs: BASE_URL + "faqs/updatefaq",
-  rejectCourse: BASE_URL + "rejectCourse",
-  getPagePost: BASE_URL + "page",
+  getAbout: BASE_URL + "api/v1/aboutUs",
+  updateAbout: BASE_URL + "aboutUs",
   getPagePosts: BASE_URL + "pagePost",
   createFAQs: BASE_URL + "faqs/create",
   deletePagePost: BASE_URL + "pagePost",
@@ -45,20 +45,8 @@ export default {
   getMedicines: BASE_URL + "medicine",
   getOrders: BASE_URL + "order/getAllOrders",
   getPharmacies: BASE_URL + "pharmacy",
-  // -----------Products--------------//
 
-  getProducts: BASE_URL + "/product/getAll?limit=1000",
-  upDateProduct: BASE_URL + "/product/update",
-  createProduct: BASE_URL + "/product/create",
-  deleteProduct: BASE_URL + "/product/delete",
-  allBookedProduct: BASE_URL + "/booking/allbookedproducts",
-  // -------------Services-------------//
-
-  getAllServices: BASE_URL + "/service/getall",
-  createService: BASE_URL + "/service/create",
-  deleteService: BASE_URL + "/service/delete",
-  updateService: BASE_URL + "/service/update",
-  allBookedServices: BASE_URL + "/booking/allbookedservices",
+  getAllReviews: BASE_URL + "review/getAll",
 
   // -------------Services-------------//
 };

@@ -16,7 +16,9 @@ const ModalAddTermsAndUses = ({
   addProduct,
   setAddProduct,
 }) => {
-  const [description, setDescription] = useState(addProduct ? "" : item?.description);
+  const [description, setDescription] = useState(
+    addProduct ? "" : item?.description
+  );
 
   const fileInputRef = useRef(null);
   const editorRef = useRef(null);
@@ -36,7 +38,7 @@ const ModalAddTermsAndUses = ({
 
     callApi(
       "POST",
-      routes.createPrivacyPolicy,
+      routes.createTermsOfUse,
       body,
       setIsLoading,
       getRes,

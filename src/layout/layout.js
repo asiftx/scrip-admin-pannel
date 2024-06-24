@@ -28,6 +28,10 @@ import PrivacyPolicy from "../pages/privacypolicy/privacyPolicy";
 import TermsOfUse from "../pages/termsOfUse/termsOfUse";
 import FAQs from "../pages/faqs/faqs";
 import Driver from "../pages/driverList/driverList";
+import Review from "../pages/reviews/reviews";
+import About from "../pages/aboutUs/aboutUs";
+import Subscriber from "../pages/subscribersList/subscribersList";
+
 import {
   userIcon,
   productIcon,
@@ -50,6 +54,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LandingPage from "../pages/landingPage/landingPage";
 import Categories from "../pages/categoryList/categoryList";
+import UserMessages from "../pages/userMessages/userMessages";
 
 const { Header, Content, Sider } = Layout;
 
@@ -87,11 +92,11 @@ const LayoutDashboard = () => {
 
   const routeToKey = {
     "/customers": "12",
-    "/courses": "13",
+    "/reviews": "13",
     "/login": "11",
-    "/pagePosts": "14",
-    "/communities": "15",
-    "/communityPosts": "16",
+    "/subscribers": "14",
+    "/aboutus": "15",
+    "/userMessages": "16",
     "/communityEvents": "20",
     "/newsEvents": "21",
     "/jobs": "22",
@@ -161,36 +166,6 @@ const LayoutDashboard = () => {
           >
             Drivers
           </Menu.Item>
-          {/* <Menu.Item
-            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
-            onClick={() => navigate("/courses")}
-            icon={
-              <img
-                style={{ height: "30px", width: "30px" }}
-                className="side-bar-icon"
-                src={courses}
-              />
-            }
-            key="13"
-            className={currentKey === "13" ? "active-menu-item" : ""}
-          >
-            Courses
-          </Menu.Item> */}
-          {/* <Menu.Item
-            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
-            onClick={() => navigate("/chat")}
-            icon={
-              <img
-                style={{ height: "30px", width: "30px" }}
-                className="side-bar-icon"
-                src={customerSupport}
-              />
-            }
-            key="41"
-            className={currentKey === "41" ? "active-menu-item" : ""}
-          >
-            Customer Support
-          </Menu.Item> */}
 
           <Menu.Item
             style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
@@ -239,6 +214,51 @@ const LayoutDashboard = () => {
           </Menu.Item>
           <Menu.Item
             style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
+            onClick={() => navigate("/subscribers")}
+            icon={
+              <img
+                style={{ height: "30px", width: "30px" }}
+                className="side-bar-icon"
+                src={order}
+              />
+            }
+            key="14"
+            className={currentKey === "14" ? "active-menu-item" : ""}
+          >
+            Subscribers
+          </Menu.Item>
+          <Menu.Item
+            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
+            onClick={() => navigate("/userMessages")}
+            icon={
+              <img
+                style={{ height: "30px", width: "30px" }}
+                className="side-bar-icon"
+                src={order}
+              />
+            }
+            key="16"
+            className={currentKey === "16" ? "active-menu-item" : ""}
+          >
+            User Messages
+          </Menu.Item>
+          <Menu.Item
+            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
+            onClick={() => navigate("/reviews")}
+            icon={
+              <img
+                style={{ height: "30px", width: "30px" }}
+                className="side-bar-icon"
+                src={order}
+              />
+            }
+            key="13"
+            className={currentKey === "13" ? "active-menu-item" : ""}
+          >
+            Reviews
+          </Menu.Item>
+          <Menu.Item
+            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
             onClick={() => navigate("/privacy-policy")}
             icon={
               <img
@@ -251,6 +271,36 @@ const LayoutDashboard = () => {
             className={currentKey === "30" ? "active-menu-item" : ""}
           >
             PrivacyPolicy
+          </Menu.Item>
+          <Menu.Item
+            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
+            onClick={() => navigate("/aboutus")}
+            icon={
+              <img
+                style={{ height: "30px", width: "30px" }}
+                className="side-bar-icon"
+                src={privacy}
+              />
+            }
+            key="15"
+            className={currentKey === "15" ? "active-menu-item" : ""}
+          >
+            About Us
+          </Menu.Item>
+          <Menu.Item
+            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
+            onClick={() => navigate("/termsOfUses")}
+            icon={
+              <img
+                style={{ height: "30px", width: "30px" }}
+                className="side-bar-icon"
+                src={privacy}
+              />
+            }
+            key="25"
+            className={currentKey === "25" ? "active-menu-item" : ""}
+          >
+            TermsOfUse
           </Menu.Item>
           <Menu.Item
             style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
@@ -290,13 +340,13 @@ const LayoutDashboard = () => {
             <Route path="/medicines" element={<Categories />} />
             <Route path="/login" element={<Login />} />
             <Route path="/landing-page" element={<LandingPage />} />
-            <Route path="/pagePosts/:id" element={<PagePosts />} />
-            <Route path="/pagePosts" element={<PagePosts />} />
-            <Route path="/communities" element={<Communities />} />
+            <Route path="/subscribers" element={<Subscriber />} />
+            <Route path="/userMessages" element={<UserMessages />} />
+            <Route path="/aboutus" element={<About />} />
             <Route path="/communityPosts/:id" element={<CommunityPosts />} />
             <Route path="/communityPosts" element={<CommunityPosts />} />
             <Route path="/communityEvents/:id" element={<CommunityEvents />} />
-            <Route path="/communityEvents" element={<CommunityEvents />} />
+            <Route path="/reviews" element={<Review />} />
             <Route path="/newsEvents" element={<NewsEvents />} />
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/feedbacks" element={<Feedbacks />} />

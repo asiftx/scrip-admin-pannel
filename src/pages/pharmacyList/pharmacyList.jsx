@@ -5,6 +5,7 @@ import { callApi } from "../../api/apiCaller";
 import routes from "../../api/routes";
 import Loader from "../../components/loader/loader";
 import moment from "moment/moment";
+import UpdateDriver from "../../components/updateDriver/updateDriver";
 import {
   crossIcon,
   homeIcon,
@@ -12,15 +13,23 @@ import {
   redTrash,
   trueIcon,
 } from "../../assets";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  PlusOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [isloading, setIsLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [updateRecordData, setUpdateRecordData] = useState(null);
+  const [isUpdateModalVisible, setUpdateModalVisible] = useState(false);
 
   const getAllUser = async () => {
     let getRes = (res) => {
-      console.log("respon", res?.data?.data);
+      console.log("respon", res);
       setUsers(res?.data?.data);
     };
 
@@ -39,7 +48,13 @@ const UserList = () => {
   useEffect(() => {
     getAllUser();
   }, []);
-
+  const handleUpdate = (recordId) => {
+    console.log("record id", recordId);
+    const selectedDriver = users.find((driver) => driver._id === recordId);
+    console.log("Selected", selectedDriver);
+    setUpdateRecordData(selectedDriver);
+    setUpdateModalVisible(true);
+  };
   const columns = [
     {
       title: "Name",
@@ -93,13 +108,6 @@ const UserList = () => {
       align: "center",
       className: "action-column-header",
     },
-    // {
-    //   title: "Phone No.",
-    //   dataIndex: "phoneNo",
-    //   align: "center",
-    //   className: "action-column-header",
-    //   width: 200,
-    // },
 
     {
       title: "Block User",
@@ -143,17 +151,41 @@ const UserList = () => {
         </div>
       ),
     },
+    {
+      title: "Approval Status",
+      dataIndex: "approved",
+      align: "center",
+      className: "action-column-header",
+    },
+    {
+      title: "Approve/Reject",
+      dataIndex: "approved",
+      className: "type-name-column-header",
+      align: "center",
+      render: (text, record) => (
+        <div>
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => handleUpdate(record._id)}
+            style={{ marginRight: 8 }}
+          ></Button>
+        </div>
+      ),
+    },
   ];
 
   const data = users
     ?.map((item, index) => {
       return {
         key: index,
+        _id: item._id,
         name: item?.name,
+        approved: item?.approved ? "approved" : "rejected",
         lastName: item?.lastName,
         userName: item?.username,
-        role: item?.role,
         email: item?.email,
+        role: item?.role,
         number: item?.number,
         location: item?.location?.address,
         dob: moment(item?.dob).format("MM-DD-YYYY"),
@@ -201,7 +233,6 @@ const UserList = () => {
       email: email,
       isBlocked: blockStatus,
     };
-    console.log("data:::", data);
 
     let getRes = (res) => {};
 
@@ -214,16 +245,16 @@ const UserList = () => {
 
   return (
     <div className="admin-products-main-container">
-     <Loader loading={isloading} />
+      <Loader loading={isloading} />
       <Breadcrumb separator=">" className="bread-crumb">
         <div className="configure-server-home-icon">
           <img src={homeIcon} alt="home-icon" />
         </div>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Pharmacies</Breadcrumb.Item>
+        <Breadcrumb.Item>Drivers</Breadcrumb.Item>
       </Breadcrumb>
       <div className="configure-server-roles-main-heading-container">
-        <h1>Pharmacies</h1>
+        <h1>Drivers</h1>
         <div></div>
         <div className="search-inputs" style={{ width: "30rem" }}>
           <Input
@@ -242,6 +273,15 @@ const UserList = () => {
           className="subscriptionapi-table"
         ></Table>
       </div>
+      <UpdateDriver
+        visible={isUpdateModalVisible}
+        toggleModal={() => {
+          setUpdateModalVisible(false);
+          getAllUser();
+        }}
+        onCancel={() => setUpdateModalVisible(false)}
+        recordData={updateRecordData}
+      />
     </div>
   );
 };
