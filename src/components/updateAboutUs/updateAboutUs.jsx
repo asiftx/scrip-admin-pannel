@@ -103,6 +103,7 @@ const UpdateOrganizer = ({
           requestBody,
           setIsLoading,
           (res) => {
+            console.log("Resp", res);
             if (res.status === 200) {
               GreenNotify("About Us Updated Successfully");
               toggleModal();

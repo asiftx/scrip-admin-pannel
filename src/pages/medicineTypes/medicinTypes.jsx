@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Breadcrumb, Button, Select, Table, Input, Modal } from "antd";
+import { Breadcrumb, Button, Select, Table, Input, Image } from "antd";
 import { callApi } from "../../api/apiCaller";
 import routes from "../../api/routes";
 import Loader from "../../components/loader/loader";
@@ -7,8 +7,8 @@ import moment from "moment/moment";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { notification } from "antd";
 import { GreenNotify, RedNotify } from "../../helper/helper";
-import UpdateAboutUs from "../../components/updateAboutUs/updateAboutUs";
-// import About from "../../components/addAbout/addAbout";
+import UpdateType from "../../components/updateMedicineType/updateMedicineType";
+import Type from "../../components/addMedicineType/addMedicineType";
 
 import {
   crossIcon,
@@ -19,25 +19,23 @@ import {
 } from "../../assets";
 
 const Organizers = () => {
-  const [about, setAbout] = useState([]);
+  const [types, setTypes] = useState([]);
   const [isloading, setIsLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [selectedOrganizer, setSelectedOrganizer] = useState(null);
   const [isUpdateModalVisible, setUpdateModalVisible] = useState(false);
   const [updateRecordData, setUpdateRecordData] = useState(null);
   const [isOrganizerModalVisible, setIsOrganizerModalVisible] = useState(false);
-  const [expandedText, setExpandedText] = useState(null);
-  const [expandedModalVisible, setExpandedModalVisible] = useState(false);
 
-  const getAllAboutUS = () => {
+  const getAllTypes = () => {
     let getRes = (res) => {
-      console.log("response??????", res?.data?.aboutUs);
-      setAbout(res?.data?.aboutUs);
+      console.log("response??????", res?.data.medicineTypes);
+      setTypes(res?.data?.medicineTypes);
     };
 
     callApi(
       "GET",
-      `${routes.getAbout}`,
+      `${routes.getMedTypes}`,
       null,
       setIsLoading,
       getRes,
@@ -46,26 +44,17 @@ const Organizers = () => {
   };
 
   useEffect(() => {
-    getAllAboutUS();
+    getAllTypes();
   }, []);
 
   const columns = [
     {
-      title: "Text",
-      dataIndex: "text",
-      className: "type-name-column-header",
+      title: "Name",
+      dataIndex: "name",
+      className: "role-name-column-header",
       align: "center",
-      render: (text) => (
-        <div>
-          <p>{text.length > 50 ? `${text.slice(0, 30)}...` : text}</p>
-          {text.length > 50 && (
-            <Button type="link" onClick={() => handleShowMore(text)}>
-              Show More
-            </Button>
-          )}
-        </div>
-      ),
     },
+
     {
       title: "Action",
       dataIndex: "id",
@@ -79,24 +68,29 @@ const Organizers = () => {
             onClick={() => handleUpdate(record.id)}
             style={{ marginRight: 8 }}
           ></Button>
+          <Button
+            type="danger"
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record.id)}
+          ></Button>
         </div>
       ),
     },
   ];
-  const data = about
+  const data = types
     ?.map((item, index) => {
       console.log("item", item);
       return {
         key: index,
         id: item?._id,
-        text: item?.text,
+        name: item?.name,
       };
     })
     .filter((item) => {
-      const titleMatch = item.text
+      const nameMatch = item.name
         ?.toLowerCase()
         .includes(searchText?.toLowerCase());
-      return titleMatch;
+      return nameMatch;
     });
 
   const getRowClassName = (record, index) => {
@@ -105,27 +99,43 @@ const Organizers = () => {
     }
     return "server-role-odd-row";
   };
+  const handleDelete = (recordId) => {
+    console.log(`Delete record with id: ${recordId}`);
+    callApi(
+      "DELETE",
+      `${routes.deleteMedType}/${recordId}`,
+      null,
+      setIsLoading,
+      (res) => {
+        if (res.status === 200) {
+          setTypes((prevType) =>
+            prevType.filter((type) => type._id !== recordId)
+          );
 
-  const handleShowMore = (text) => {
-    setExpandedText(text);
-    setExpandedModalVisible(true);
+          GreenNotify("Type Deleted Successfully");
+        } else {
+          RedNotify("Error Occurred while deleting category");
+        }
+      },
+      (error) => {
+        console.log("error", error);
+
+        notification.error({
+          message: "Error",
+          description: "An error occurred while deleting the Category.",
+        });
+      }
+    );
   };
-
-  const handleCloseModal = () => {
-    setExpandedText(null);
-    setExpandedModalVisible(false);
-  };
-
   const handleOrganizerModelClick = () => {
     setIsOrganizerModalVisible(true);
   };
-
   const handleUpdate = (recordId) => {
     console.log("Selected id", recordId);
-    const selectedAbout = about.find((about) => about._id === recordId);
-    console.log("selectedAbout??????", selectedAbout);
+    const selectedType = types.find((type) => type._id === recordId);
+    console.log("selected??????", selectedType);
 
-    setUpdateRecordData(selectedAbout);
+    setUpdateRecordData(selectedType);
     setUpdateModalVisible(true);
   };
 
@@ -137,13 +147,29 @@ const Organizers = () => {
           <img src={homeIcon} alt="home-icon" />
         </div>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>About Us</Breadcrumb.Item>
+        <Breadcrumb.Item>Medicine Types</Breadcrumb.Item>
       </Breadcrumb>
       <div className="configure-server-roles-main-heading-container">
-        <h1>About Us</h1>
+        <h1>Medicine Types</h1>
         <div></div>
+        <div className="search-inputs" style={{ width: "30rem" }}>
+          <Input
+            placeholder="Search Type..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
       </div>
-
+      {
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={handleOrganizerModelClick}
+          style={{ marginBottom: "16px" }}
+        >
+          Add
+        </Button>
+      }
       <div className="server-roles-tb-main-container">
         <Table
           rowClassName={getRowClassName}
@@ -154,25 +180,25 @@ const Organizers = () => {
         ></Table>
       </div>
 
-      <UpdateAboutUs
+      <UpdateType
         visible={isUpdateModalVisible}
         toggleModal={() => {
           setUpdateModalVisible(false);
-          getAllAboutUS();
+          getAllTypes();
         }}
         onCancel={() => setUpdateModalVisible(false)}
         recordData={updateRecordData}
         selectedOrganizer={selectedOrganizer}
       />
-
-      <Modal
-        title="About Us"
-        visible={expandedModalVisible}
-        onCancel={handleCloseModal}
-        footer={null}
-      >
-        <p style={{ textAlign: "justify" }}>{expandedText}</p>
-      </Modal>
+      {isOrganizerModalVisible && (
+        <Type
+          visible={isOrganizerModalVisible}
+          toggleModal={() => {
+            setIsOrganizerModalVisible(false);
+            getAllTypes();
+          }}
+        />
+      )}
     </div>
   );
 };

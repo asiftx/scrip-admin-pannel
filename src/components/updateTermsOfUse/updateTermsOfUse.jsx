@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./modelAddTerms.css";
+// import "./modelAddTerms.css";
 import {
   Button,
   Modal,
@@ -26,7 +26,7 @@ const TinyEditor = ({ onChange, editorRef, value, initialValue }) => {
   return (
     <>
       <Editor
-        apiKey="lj0e821xk4kcy1r1qynucz8rxg9k8exwsk8al5al660mgqho"
+        apiKey="tocrv6fmbel9jpk13dwdcbv935blvf6k8w5ikx14g1f3u46m"
         onChange={onChange}
         //   value={}
         onInit={(evt, editor) => (editorRef.current = editor)}
@@ -73,6 +73,11 @@ const ModalAddTerms = ({
         setShowModal(false);
         setAddProduct(false);
       }
+      if (res.status == 200) {
+        GreenNotify("Terms and condtions created successfully");
+        setShowModal(false);
+        setAddProduct(false);
+      }
     };
 
     let body = {
@@ -85,16 +90,9 @@ const ModalAddTerms = ({
       body,
       setIsLoading,
       getRes,
-      (getResp, Error) => {
-        console.log("Resp....", getResp);
-        if (getResp.success) {
-          GreenNotify("Terms and condtions created successfully");
-          setShowModal(false);
-          setAddProduct(false);
-        } else {
-          RedNotify(Error.message);
-          console.log("error", Error);
-        }
+      (error) => {
+        RedNotify(error.message);
+        console.log("error", error);
       }
     );
   };

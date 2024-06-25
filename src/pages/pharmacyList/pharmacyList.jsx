@@ -251,10 +251,10 @@ const UserList = () => {
           <img src={homeIcon} alt="home-icon" />
         </div>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Drivers</Breadcrumb.Item>
+        <Breadcrumb.Item>Pharmacy</Breadcrumb.Item>
       </Breadcrumb>
       <div className="configure-server-roles-main-heading-container">
-        <h1>Drivers</h1>
+        <h1>Pharmacy</h1>
         <div></div>
         <div className="search-inputs" style={{ width: "30rem" }}>
           <Input

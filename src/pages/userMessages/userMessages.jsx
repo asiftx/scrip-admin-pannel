@@ -23,18 +23,12 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+
 const Reviews = () => {
   const [userMessages, setUserMessages] = useState([]);
   const [isloading, setIsLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [isUpdateModalVisible, setUpdateModalVisible] = useState(false);
-  const [selectedRecordId, setSelectedRecordId] = useState(null);
-  const [addProduct, setAddProduct] = useState(false);
   const [expandedReview, setExpandedReview] = useState(null);
-  const [updateRecordData, setUpdateRecordData] = useState(null);
-  const [isSchoolModalVisible, setIsSchoolModalVisible] = useState(false);
-  const [expandedText, setExpandedText] = useState(null);
-  const [expandedModalVisible, setExpandedModalVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -55,15 +49,15 @@ const Reviews = () => {
       }
     );
   };
+
   const handleShowMore = (text) => {
-    setExpandedText(text);
-    setExpandedModalVisible(true);
+    setExpandedReview(text);
   };
 
   const handleCloseModal = () => {
-    setExpandedText(null);
-    setExpandedModalVisible(false);
+    setExpandedReview(null);
   };
+
   useEffect(() => {
     getAllUserMessages();
   }, []);
@@ -164,7 +158,7 @@ const Reviews = () => {
       </div>
       {expandedReview && (
         <Modal
-          title="Full Review"
+          title="Message"
           visible={!!expandedReview}
           onCancel={handleCloseModal}
           footer={null}

@@ -4,13 +4,11 @@ import { Breadcrumb, Button, Select, Image } from "antd";
 import { addIcon, editIcon, homeIcon, redTrash } from "../../assets";
 import { Table } from "antd";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import ModalAddFAQs from "../../components/updateFaqs/updateFaqs";
 import AddFaq from "../../components/AddFAQModel/AddFAQModel";
 import routes from "../../api/routes";
 import { callApi } from "../../api/apiCaller";
 import Loader from "../../components/loader/loader";
 import { GreenNotify, RedNotify } from "../../helper/helper";
-import FAQModel from "../../components/AddFAQModel/AddFAQModel";
 import { useDispatch } from "react-redux";
 import { productItem } from "../../redux/userDataSlice";
 import DescriptionModal from "../../components/descriptionModal/descriptionModal";
@@ -31,6 +29,7 @@ const FAQs = () => {
   const [isFAQModalVisible, setIsFAQModalVisible] = useState(false);
   const getPreferences = () => {
     let getRes = (res) => {
+      console.log("RESo", res);
       setProducts(res?.data?.fAQS);
     };
 
@@ -137,21 +136,6 @@ const FAQs = () => {
   };
   return (
     <div className="admin-products-main-container">
-      {showModal && (
-        <ModalAddFAQs
-          showModal={showModal}
-          setShowModal={setShowModal}
-          item={product}
-          setIsLoading={setIsLoading}
-          addProduct={addProduct}
-          setAddProduct={setAddProduct}
-          toggleModal={() => {
-            setShowModal(false);
-            getPreferences();
-          }}
-        />
-      )}
-
       {isFAQModalVisible && (
         <AddFaq
           setIsFAQModalVisible={setIsFAQModalVisible}
