@@ -87,7 +87,7 @@ const ModalAddPrivacyPolicy = ({
         <div>
           <h3>Content</h3>
           <Editor
-            apiKey="tocrv6fmbel9jpk13dwdcbv935blvf6k8w5ikx14g1f3u46m"
+            apiKey="kttjxe20gth0u5wh3mfo9b9ix7o7o7dvr1zdsamvp09xfycq"
             onInit={(evt, editor) => {
               editorRef.current = editor;
             }}
