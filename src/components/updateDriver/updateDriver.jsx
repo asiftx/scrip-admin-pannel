@@ -33,7 +33,8 @@ const AddCategory = ({
       .validateFields()
       .then((values) => {
         console.log("Values", values);
-        const url = `${routes.updateUser}/${recordData._id}`;
+        console.log("recorddddd", recordData._id);
+        const url = `${routes.updateUser}/${recordData.id}`;
         const data = { approved: values.approved }; // Construct the data object correctly
         console.log("data", data);
         callApi(

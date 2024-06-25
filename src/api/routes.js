@@ -17,7 +17,6 @@ export default {
   updateFAQs: BASE_URL + "faqs/updatefaq",
   getAbout: BASE_URL + "api/v1/aboutUs",
   updateAbout: BASE_URL + "api/v1/aboutUs",
-  getPagePosts: BASE_URL + "pagePost",
   createFAQs: BASE_URL + "api/v1/fAQS",
   deletePagePost: BASE_URL + "pagePost",
   getCommunityPosts: BASE_URL + "communityPost",
