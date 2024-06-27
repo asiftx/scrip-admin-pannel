@@ -1,61 +1,69 @@
-.landing-page-main-container {
-  margin-top: 140px;
+.dashboard-main-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  min-height: 100vh;
+  background-color: #f0f2f5;
 }
 
 .header {
-  margin-bottom: 20px;
+  background-color: #001529;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
 }
 
 .bread-crumb {
-  margin-bottom: 10px;
-}
-
-.configure-server-home-icon img {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
+  margin-left: 20px;
 }
 
 .content {
+  flex: 1;
+  padding: 40px;
+  background: #fff;
+}
+
+.welcome-message {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.welcome-message {
-  margin-bottom: 20px;
-}
-
 .welcome-heading {
-  font-size: 36px;
-  color: #1890ff;
+  font-size: 2.5em;
+  margin: 0;
 }
 
 .welcome-subtext {
-  font-size: 18px;
-  color: #555;
+  font-size: 1.2em;
+  color: #888;
 }
 
-.dynamic-card-main-container {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
-.dynamic-card {
-  padding: 40px;
+.ant-card {
+  text-align: center;
+}
+
+.ant-card .ant-statistic-title {
+  font-size: 1.2em;
+}
+
+.ant-card .ant-statistic-content {
+  font-size: 2em;
 }
 
 .footer {
+  background-color: #001529;
+  color: white;
   text-align: center;
-  margin-top: 40px;
+  padding: 10px 20px;
+  margin-top: 926px;
 }
 
 .footer-text {
-  font-size: 14px;
-  color: #888;
+  margin: 0;
 }

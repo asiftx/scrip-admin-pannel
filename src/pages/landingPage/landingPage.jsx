@@ -1,43 +1,120 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./landingPage.css";
-import { Breadcrumb, Button, Select, Image } from "antd";
-import { homeIcon, welcomeImage } from "../../assets"; // Assuming you have a welcome image
+import { Breadcrumb, Card, Row, Col, Statistic, Spin } from "antd";
+import CountUp from "react-countup";
+import { callApi } from "../../api/apiCaller";
+import routes from "../../api/routes";
+import {
+  UserOutlined,
+  CarOutlined,
+  MedicineBoxOutlined,
+} from "@ant-design/icons";
 
-const LandingPage = () => {
+const Dashboard = () => {
+  const [driversCount, setDriversCount] = useState(0);
+  const [customersCount, setCustomersCount] = useState(0);
+  const [pharmaciesCount, setPharmaciesCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getAllUser = async () => {
+    let getRes = (res) => {
+      const users = res?.data?.data;
+
+      const drivers = users.filter((user) => user.role === "driver");
+      const customers = users.filter((user) => user.role === "customer");
+      const pharmacies = users.filter((user) => user.role === "pharmacy");
+      setTimeout(() => {
+        setDriversCount(drivers.length);
+        setCustomersCount(customers.length);
+        setPharmaciesCount(pharmacies.length);
+        setIsLoading(false);
+      }, 1000);
+    };
+
+    setIsLoading(true);
+    const result = await callApi(
+      "GET",
+      `${routes.getAllUser}`,
+      null,
+      setIsLoading,
+      getRes,
+      (error) => {
+        console.log("error", error);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getAllUser();
+  }, []);
+
   return (
-    <div className="landing-page-main-container">
-      <div className="header">
+    <div className="dashboard-main-container">
+      <header className="header">
         <Breadcrumb separator=">" className="bread-crumb">
-          <div className="configure-server-home-icon">
-            {/* <img src={homeIcon} alt="home-icon" /> */}
-          </div>
-         
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
         </Breadcrumb>
-      </div>
+      </header>
 
-      <div className="content">
+      <main className="content">
         <div className="welcome-message">
-          <h1 className="welcome-heading">Welcome to ScripID!</h1>
+          <h1 className="welcome-heading">Welcome to the Dashboard!</h1>
           <p className="welcome-subtext">
-            Your Ultimate Platform for Seamless Experiences
+            Overview of your platform's key metrics
           </p>
         </div>
 
-        <div className="dynamic-card-main-container">
-          <div className="dynamic-card">
-            {/* Add dynamic content or components here */}
-            <Button type="primary" size="large">
-              Get Started
-            </Button>
+        {isLoading ? (
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <Spin size="large" />
           </div>
-        </div>
-      </div>
+        ) : (
+          <Row gutter={16} className="stats-row">
+            <Col span={8}>
+              <Card>
+                <CarOutlined style={{ fontSize: "48px", color: "#3f8600" }} />
+                <Statistic
+                  title="Drivers"
+                  value={driversCount}
+                  formatter={(value) => <CountUp end={value} duration={2} />}
+                  valueStyle={{ color: "#3f8600" }}
+                />
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card>
+                <UserOutlined style={{ fontSize: "48px", color: "#3f8600" }} />
+                <Statistic
+                  title="Customers"
+                  value={customersCount}
+                  formatter={(value) => <CountUp end={value} duration={2} />}
+                  valueStyle={{ color: "#3f8600" }}
+                />
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card>
+                <MedicineBoxOutlined
+                  style={{ fontSize: "48px", color: "#3f8600" }}
+                />
+                <Statistic
+                  title="Pharmacies"
+                  value={pharmaciesCount}
+                  formatter={(value) => <CountUp end={value} duration={2} />}
+                  valueStyle={{ color: "#3f8600" }}
+                />
+              </Card>
+            </Col>
+          </Row>
+        )}
+      </main>
 
-      <div className="footer">
-        <p className="footer-text">© 2023 Paisero. All rights reserved.</p>
-      </div>
+      <footer className="footer">
+        <p className="footer-text">© 2024 ScriptId. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
-export default LandingPage;
+export default Dashboard;
