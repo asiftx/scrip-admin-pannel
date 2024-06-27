@@ -1,6 +1,6 @@
 // export const BASE_URL = "https://pix2igp54z.ap-northeast-1.awsapprunner.com/";
-// export const BASE_URL = "https://hcpxrfggs3.us-east-2.awsapprunner.com/";
-export const BASE_URL = "http://localhost:4500/";
+export const BASE_URL = "https://hcpxrfggs3.us-east-2.awsapprunner.com/";
+// export const BASE_URL = "http://localhost:4500/";
 
 export default {
   // -----AUTH------//
