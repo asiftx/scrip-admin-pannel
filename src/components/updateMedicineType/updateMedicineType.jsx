@@ -20,6 +20,7 @@ const UpdateOrganizer = ({
       console.log("record data", recordData);
       form.setFieldsValue({
         name: recordData?.name,
+        unit: recordData?.unit,
       });
     }
   }, [visible, recordData, form]);
@@ -78,6 +79,13 @@ const UpdateOrganizer = ({
           label="Name"
           name="name"
           rules={[{ required: true, message: "Please enter the type" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Unit"
+          name="unit"
+          rules={[{ required: true, message: "Please enter the unit" }]}
         >
           <Input />
         </Form.Item>

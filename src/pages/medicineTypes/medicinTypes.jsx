@@ -54,7 +54,12 @@ const Organizers = () => {
       className: "role-name-column-header",
       align: "center",
     },
-
+    {
+      title: "Unit",
+      dataIndex: "unit",
+      className: "role-name-column-header",
+      align: "center",
+    },
     {
       title: "Action",
       dataIndex: "id",
@@ -84,6 +89,7 @@ const Organizers = () => {
         key: index,
         id: item?._id,
         name: item?.name,
+        unit: item?.unit,
       };
     })
     .filter((item) => {

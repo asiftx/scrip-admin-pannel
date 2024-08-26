@@ -86,7 +86,19 @@ const AddCategory = ({
           rules={[
             {
               required: true,
-              message: "Please enter the name",
+              message: "Please enter the type",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Unit"
+          name="unit"
+          rules={[
+            {
+              required: true,
+              message: "Please enter the unit",
             },
           ]}
         >
