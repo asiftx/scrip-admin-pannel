@@ -14,7 +14,7 @@ export default {
   getUserMessage: BASE_URL + "api/v1/getInTouch",
   updateCourse: BASE_URL + "updateCourse",
   updateUser: BASE_URL + "user",
-  updateFAQs: BASE_URL + "faqs/updatefaq",
+  updateFAQs: BASE_URL + "api/v1/fAQS",
   getAbout: BASE_URL + "api/v1/aboutUs",
   updateAbout: BASE_URL + "api/v1/aboutUs",
   createFAQs: BASE_URL + "api/v1/fAQS",
