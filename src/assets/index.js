@@ -25,3 +25,4 @@ export { default as messageIcon } from "./messages.png";
 export { default as ratingIcon } from "./rating.png";
 export { default as termsIcon } from "./terms-and-conditions.png";
 export { default as informationIcon } from "./information.png";
+export { default as ShopsIcon } from "./shops.png";

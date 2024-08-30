@@ -12,6 +12,7 @@ import routes from "../api/routes";
 import { GreenNotify, RedNotify } from "../helper/helper";
 import Loader from "../components/loader/loader";
 import UserList from "../pages/userList/userList";
+
 import Pages from "../pages/pages/pages";
 import { MenuOutlined } from "@ant-design/icons";
 import PagePosts from "../pages/pagePosts/pagePosts";
@@ -28,6 +29,7 @@ import PrivacyPolicy from "../pages/privacypolicy/privacyPolicy";
 import TermsOfUse from "../pages/termsOfUse/termsOfUse";
 import FAQs from "../pages/faqs/faqs";
 import Driver from "../pages/driverList/driverList";
+import Shopp from "../pages/shopsList/shopsList";
 import Review from "../pages/reviews/reviews";
 import About from "../pages/aboutUs/aboutUs";
 import Subscriber from "../pages/subscribersList/subscribersList";
@@ -45,6 +47,7 @@ import {
   categories,
   customers,
   ratingIcon,
+  ShopsIcon,
   faqs,
   termsIcon,
 } from "../assets";
@@ -112,6 +115,7 @@ const LayoutDashboard = () => {
     "/orders": "42",
     "/pharmacies": "43",
     "/drivers": "44",
+    "/shops": "80",
   };
 
   const currentKey = routeToKey[currentPath];
@@ -153,6 +157,21 @@ const LayoutDashboard = () => {
             className={currentKey === "12" ? "active-menu-item" : ""}
           >
             Customers
+          </Menu.Item>
+          <Menu.Item
+            style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
+            onClick={() => navigate("/shops")}
+            icon={
+              <img
+                style={{ height: "30px", width: "30px" }}
+                className="side-bar-icon"
+                src={ShopsIcon}
+              />
+            }
+            key="80"
+            className={currentKey === "980" ? "active-menu-item" : ""}
+          >
+            Shops
           </Menu.Item>
           <Menu.Item
             style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
@@ -371,6 +390,7 @@ const LayoutDashboard = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/termsOfUses" element={<TermsOfUse />} />
+            <Route path="/shops" element={<Shopp />} />
           </Routes>
         </Content>
       </Layout>
