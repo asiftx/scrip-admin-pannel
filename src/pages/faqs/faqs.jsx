@@ -6,7 +6,7 @@ import { addIcon, editIcon, homeIcon, redTrash } from "../../assets";
 import { callApi } from "../../api/apiCaller";
 import Loader from "../../components/loader/loader";
 import { GreenNotify, RedNotify } from "../../helper/helper";
-import AddFAQModel from "../../components/AddFAQModel/AddFAQModel";
+import AddFAQModel from "../../components/ModalAddFAQS/ModalAddFAQS";
 import routes from "../../api/routes";
 
 const FAQs = () => {
@@ -50,15 +50,17 @@ const FAQs = () => {
 
   const columns = [
     {
-      title: "Question",
-      dataIndex: "question",
+      title: "FAQ",
+      dataIndex: "data",
       align: "center",
       width: 420,
-    },
-    {
-      title: "Answer",
-      dataIndex: "answer",
-      align: "center",
+      render: (text) => (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: text,
+          }}
+        />
+      ),
     },
     {
       title: "Edit",
@@ -68,7 +70,7 @@ const FAQs = () => {
         <div
           onClick={() => {
             setSelectedProduct(item);
-            setIsAddMode(false); // Switch to edit mode
+            setIsAddMode(false);
             setIsFAQModalVisible(true);
           }}
         >
@@ -96,13 +98,12 @@ const FAQs = () => {
     <div className="admin-products-main-container">
       {isFAQModalVisible && (
         <AddFAQModel
-          isAddMode={isAddMode}
+          setShowModal={setIsFAQModalVisible}
+          showModal={isFAQModalVisible}
           item={selectedProduct}
           setIsLoading={setIsLoading}
-          toggleModal={() => {
-            setIsFAQModalVisible(false);
-            getPreferences();
-          }}
+          addProduct={isAddMode}
+          setAddProduct={setIsAddMode}
         />
       )}
 
@@ -118,8 +119,8 @@ const FAQs = () => {
         <h1>FAQ's</h1>
         <div
           onClick={() => {
-            setIsAddMode(true); // Switch to add mode
-            setSelectedProduct(null); // Clear selected product
+            setIsAddMode(true);
+            setSelectedProduct(null);
             setIsFAQModalVisible(true);
           }}
           className="server-roles-add-btn"
