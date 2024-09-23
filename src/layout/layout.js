@@ -134,7 +134,7 @@ const LayoutDashboard = () => {
             position: "sticky",
           }}
         >
-          SCRIPTID
+          SCRIPID
         </div>
         <Menu
           style={{ marginTop: "5rem" }}
