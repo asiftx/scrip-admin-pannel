@@ -50,8 +50,8 @@ const FAQs = () => {
 
   const columns = [
     {
-      title: "FAQ",
-      dataIndex: "data",
+      title: "Questions",
+      dataIndex: "question",
       align: "center",
       width: 420,
       render: (text) => (
@@ -62,6 +62,20 @@ const FAQs = () => {
         />
       ),
     },
+    {
+      title: "Answer",
+      dataIndex: "answer",
+      align: "center",
+      width: 420,
+      render: (text) => (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: text,
+          }}
+        />
+      ),
+    },
+    ,
     {
       title: "Edit",
       dataIndex: "edit",

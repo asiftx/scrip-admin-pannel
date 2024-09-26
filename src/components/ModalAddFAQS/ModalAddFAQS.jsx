@@ -17,6 +17,8 @@ const ModalAddPrivacyPolicy = ({
   setAddProduct,
 }) => {
   const [description, setDescription] = useState(item?.description || "");
+  const [question, setQuestion] = useState(item?.question || "");
+
   console.log("item id", item?._id);
   const fileInputRef = useRef(null);
   const editorRef = useRef(null);
@@ -31,7 +33,9 @@ const ModalAddPrivacyPolicy = ({
     };
 
     let body = {
-      data: editorRef.current.getContent(),
+      answer: editorRef.current.getContent(),
+      question: question,
+
     };
 
     callApi("POST", routes.createFAQs, body, setIsLoading, getRes, (error) => {
@@ -48,7 +52,9 @@ const ModalAddPrivacyPolicy = ({
     };
 
     let body = {
-      data: editorRef.current.getContent(),
+      answer: editorRef.current.getContent(),
+      question: question,
+      
     };
     console.log("item", item._id);
     callApi(
@@ -72,13 +78,19 @@ const ModalAddPrivacyPolicy = ({
       <div className="add-product-modal-container">
         <div style={{ marginTop: "5rem" }}></div>
         <div>
-          <h3>Content</h3>
+        <h3>Question</h3>
+          <Input
+            placeholder="Enter Question"
+            value={question} // Updated to bind with state
+            onChange={(e) => setQuestion(e.target.value)} // Correctly update the question state
+          />
+          <h3>Answer</h3>
           <Editor
             apiKey="kttjxe20gth0u5wh3mfo9b9ix7o7o7dvr1zdsamvp09xfycq"
             onInit={(evt, editor) => {
               editorRef.current = editor;
             }}
-            initialValue={item?.data}
+            initialValue={item?.answer}
             onEditorChange={handleEditorChange}
             init={{
               plugins: "image link lists",
