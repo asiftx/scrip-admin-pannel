@@ -95,9 +95,13 @@ const ModalAddPrivacyPolicy = ({
             onEditorChange={handleEditorChange}
             init={{
               plugins: "image link",
-              file_picker_types: "file image media",
+              toolbar:
+                "styleselect | fontselect | fontsize | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | h1 h2 h3 h4 h5 h6 | code", // Add font size control to toolbar
+              fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+              file_picker_types: "image media",
               relative_urls: false,
               remove_script_host: false,
+              menubar: false,
               // force_p_newlines: true,
             }}
           />

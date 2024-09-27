@@ -307,7 +307,7 @@ const LayoutDashboard = () => {
             key="30"
             className={currentKey === "30" ? "active-menu-item" : ""}
           >
-            PrivacyPolicy
+            Privacy Policy
           </Menu.Item>
           <Menu.Item
             style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}
@@ -337,7 +337,7 @@ const LayoutDashboard = () => {
             key="25"
             className={currentKey === "25" ? "active-menu-item" : ""}
           >
-            TermsOfUse
+            Terms Of Use
           </Menu.Item>
           <Menu.Item
             style={{ marginBottom: "3rem", color: "white", fontWeight: "bold" }}

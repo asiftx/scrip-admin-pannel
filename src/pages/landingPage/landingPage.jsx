@@ -111,7 +111,7 @@ const Dashboard = () => {
       </main>
 
       <footer className="footer">
-        <p className="footer-text">© 2024 ScriptId. All rights reserved.</p>
+        <p className="footer-text">© 2024 SCRIPID. All rights reserved.</p>
       </footer>
     </div>
   );

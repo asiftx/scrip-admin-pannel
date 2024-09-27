@@ -91,9 +91,10 @@ const ModalAddPrivacyPolicy = ({
             initialValue={item?.answer}
             onEditorChange={handleEditorChange}
             init={{
-              plugins: "lists",
+              plugins: "lists textcolor",
               toolbar:
-                "undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | code", // Toolbar configuration
+                "styleselect | fontselect | fontsize | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | h1 h2 h3 h4 h5 h6 | code", // Add font size control to toolbar
+              fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
               file_picker_types: "image media",
               relative_urls: false,
               remove_script_host: false,
