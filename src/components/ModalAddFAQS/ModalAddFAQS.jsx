@@ -35,7 +35,6 @@ const ModalAddPrivacyPolicy = ({
     let body = {
       answer: editorRef.current.getContent(),
       question: question,
-
     };
 
     callApi("POST", routes.createFAQs, body, setIsLoading, getRes, (error) => {
@@ -54,7 +53,6 @@ const ModalAddPrivacyPolicy = ({
     let body = {
       answer: editorRef.current.getContent(),
       question: question,
-      
     };
     console.log("item", item._id);
     callApi(
@@ -78,11 +76,11 @@ const ModalAddPrivacyPolicy = ({
       <div className="add-product-modal-container">
         <div style={{ marginTop: "5rem" }}></div>
         <div>
-        <h3>Question</h3>
+          <h3>Question</h3>
           <Input
             placeholder="Enter Question"
-            value={question} // Updated to bind with state
-            onChange={(e) => setQuestion(e.target.value)} // Correctly update the question state
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
           />
           <h3>Answer</h3>
           <Editor
@@ -93,12 +91,13 @@ const ModalAddPrivacyPolicy = ({
             initialValue={item?.answer}
             onEditorChange={handleEditorChange}
             init={{
-              plugins: "image link lists",
+              plugins: "lists",
               toolbar:
-                "undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | code",
-              file_picker_types: "file image media",
+                "undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | code", // Toolbar configuration
+              file_picker_types: "image media",
               relative_urls: false,
               remove_script_host: false,
+              menubar: false,
             }}
           />
         </div>
