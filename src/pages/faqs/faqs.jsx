@@ -23,6 +23,7 @@ const FAQs = () => {
       null,
       setIsLoading,
       (res) => {
+        console.log("Response", res);
         setProducts(res?.data?.fAQS);
       },
       (error) => {

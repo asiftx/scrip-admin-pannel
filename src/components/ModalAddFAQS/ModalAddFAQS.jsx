@@ -95,7 +95,7 @@ const ModalAddPrivacyPolicy = ({
             init={{
               plugins: "image link lists",
               toolbar:
-                "undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code",
+                "undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | code",
               file_picker_types: "file image media",
               relative_urls: false,
               remove_script_host: false,
