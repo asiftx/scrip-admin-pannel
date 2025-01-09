@@ -11,7 +11,6 @@ AWS.config.update({
   secretAccessKey: "kszWRnck22uQdxNBnisMWAFvuEP3p9X6WkH6SWFV",
   // region: "ap-southeast-2",
 });
-console.log(",,,,", process.env.REACT_APP_AWS_ACCESS_KEY_ID);
 const AddCategory = ({
   visible,
   item,
