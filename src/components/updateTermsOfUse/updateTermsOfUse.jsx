@@ -14,6 +14,7 @@ const TinyEditor = ({ onChange, editorRef, value, initialValue }) => {
       console.log(editorRef.current.getContent());
     }
   };
+
   return (
     <>
       <Editor
@@ -22,28 +23,52 @@ const TinyEditor = ({ onChange, editorRef, value, initialValue }) => {
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue={initialValue}
         init={{
-          plugins: "lists image link", // Ensure the 'lists' plugin is included
+          plugins: "lists image link",
           toolbar:
-            "styleselect | fontselect | fontsize | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | romanlist | h1 h2 h3 h4 h5 h6 | code", // Include the custom 'romanlist' button
+            "styleselect | fontselect | fontsize | bold italic | alignleft aligncenter alignright | bullist numlist romanlist upperalphalist loweralphalist | h1 h2 h3 h4 h5 h6 | code",
           fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
           file_picker_types: "image media",
           relative_urls: false,
           remove_script_host: false,
           menubar: false,
           content_style: `
-      ol.roman {
-        list-style-type: upper-roman;
-      }
-    `, // Add custom Roman numeral style
+            ol.roman {
+              list-style-type: upper-roman;
+            }
+            ol.upper-alpha {
+              list-style-type: upper-alpha;
+            }
+            ol.lower-alpha {
+              list-style-type: lower-alpha;
+            }
+          `,
           setup: (editor) => {
-            // Register a custom button for Roman numeral lists
             editor.ui.registry.addButton("romanlist", {
-              text: "Roman List", // Button text
+              text: "Roman List",
               tooltip: "Insert Roman numeral list",
               onAction: () => {
-                // Apply the Roman numeral list style
                 editor.execCommand("InsertOrderedList", false, {
                   "list-style-type": "upper-roman",
+                });
+              },
+            });
+
+            editor.ui.registry.addButton("upperalphalist", {
+              text: "Uppercase Alphabets",
+              tooltip: "Insert uppercase alphabetic list",
+              onAction: () => {
+                editor.execCommand("InsertOrderedList", false, {
+                  "list-style-type": "upper-alpha",
+                });
+              },
+            });
+
+            editor.ui.registry.addButton("loweralphalist", {
+              text: "Lowercase Alphabets",
+              tooltip: "Insert lowercase alphabetic list",
+              onAction: () => {
+                editor.execCommand("InsertOrderedList", false, {
+                  "list-style-type": "lower-alpha",
                 });
               },
             });
