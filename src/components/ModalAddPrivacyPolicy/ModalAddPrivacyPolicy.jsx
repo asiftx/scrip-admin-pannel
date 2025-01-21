@@ -22,63 +22,104 @@ const TinyEditor = ({ onChange, editorRef, value, initialValue }) => {
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue={initialValue}
         init={{
-          plugins: "lists image link",
+          plugins: "lists advlist",
           toolbar:
-            "styleselect | fontselect | fontsize | bold italic | alignleft aligncenter alignright | bullist numlist romanlist upperalphalist loweralphalist | h1 h2 h3 h4 h5 h6 | code",
-          fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
-          file_picker_types: "image media",
-          relative_urls: false,
-          remove_script_host: false,
-          menubar: false,
+            "undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | outdent indent | customnumlist",
+          advlist_bullet_styles: "default,circle,square",
+          advlist_number_styles:
+            "default,lower-alpha,upper-alpha,lower-roman,upper-roman",
           content_style: `
-            ol.roman {
-              list-style-type: upper-roman;
+            ol {
+              list-style-type: decimal;
+              margin: 0;
+              padding-left: 2rem;
             }
-            ol.upper-alpha {
-              list-style-type: upper-alpha;
-            }
-            ol.lower-alpha {
+            ol ol {
               list-style-type: lower-alpha;
+            }
+            ol ol ol {
+              list-style-type: lower-roman;
+            }
+            ul {
+              list-style-type: disc;
+              margin: 0;
+              padding-left: 2rem;
+            }
+            ul ul {
+              list-style-type: circle;
+            }
+            ul ul ul {
+              list-style-type: square;
             }
           `,
           setup: (editor) => {
-            editor.ui.registry.addButton("romanlist", {
-              text: "Roman List",
-              tooltip: "Insert Roman numeral list",
-              onAction: () => {
-                editor.execCommand("InsertOrderedList", false, {
-                  "list-style-type": "upper-roman",
-                });
-              },
-            });
-
-            editor.ui.registry.addButton("upperalphalist", {
-              text: "Uppercase Alphabets",
-              tooltip: "Insert uppercase alphabetic list",
-              onAction: () => {
-                editor.execCommand("InsertOrderedList", false, {
-                  "list-style-type": "upper-alpha",
-                });
-              },
-            });
-
-            editor.ui.registry.addButton("loweralphalist", {
-              text: "Lowercase Alphabets",
-              tooltip: "Insert lowercase alphabetic list",
-              onAction: () => {
-                editor.execCommand("InsertOrderedList", false, {
-                  "list-style-type": "lower-alpha",
-                });
+            // Custom button for advanced nested ordered lists
+            editor.ui.registry.addMenuButton("customnumlist", {
+              text: "Numbered Lists",
+              tooltip: "Custom Numbered Lists",
+              fetch: (callback) => {
+                callback([
+                  {
+                    type: "choiceitem",
+                    text: "Decimal",
+                    value: "decimal",
+                    onAction: () => {
+                      editor.execCommand("InsertOrderedList", false, {
+                        "list-style-type": "decimal",
+                      });
+                    },
+                  },
+                  {
+                    type: "choiceitem",
+                    text: "Lower Alpha",
+                    value: "lower-alpha",
+                    onAction: () => {
+                      editor.execCommand("InsertOrderedList", false, {
+                        "list-style-type": "lower-alpha",
+                      });
+                    },
+                  },
+                  {
+                    type: "choiceitem",
+                    text: "Upper Alpha",
+                    value: "upper-alpha",
+                    onAction: () => {
+                      editor.execCommand("InsertOrderedList", false, {
+                        "list-style-type": "upper-alpha",
+                      });
+                    },
+                  },
+                  {
+                    type: "choiceitem",
+                    text: "Lower Roman",
+                    value: "lower-roman",
+                    onAction: () => {
+                      editor.execCommand("InsertOrderedList", false, {
+                        "list-style-type": "lower-roman",
+                      });
+                    },
+                  },
+                  {
+                    type: "choiceitem",
+                    text: "Upper Roman",
+                    value: "upper-roman",
+                    onAction: () => {
+                      editor.execCommand("InsertOrderedList", false, {
+                        "list-style-type": "upper-roman",
+                      });
+                    },
+                  },
+                ]);
               },
             });
           },
         }}
       />
-
       <button onClick={log}>Log editor content</button>
     </>
   );
 };
+
 const ModalAddTerms = ({
   setShowModal,
   showModal,
